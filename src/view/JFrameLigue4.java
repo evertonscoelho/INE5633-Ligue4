@@ -43,4 +43,14 @@ public class JFrameLigue4 extends JFrame {
 		mito.posicaoClicada(coluna);
 	}
 
+	public boolean getVezJogador() {
+		String[] escolha = {"Humano", "Mito", "Yu-gi-Yo"};
+		int resp = JOptionPane.showOptionDialog(null, "Quem comeca esse grande duelo?", "Quem?", 0, JOptionPane.QUESTION_MESSAGE, null, escolha, escolha[0]);
+		if(resp == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 }

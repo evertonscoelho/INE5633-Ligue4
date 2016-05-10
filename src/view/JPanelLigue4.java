@@ -39,9 +39,9 @@ public class JPanelLigue4 extends JPanel {
 	public void criaTabuleiro() {
 		int y = 70;
 
-		for (int linha = 0; linha < 6; linha++) {
+		for (int linha = 5; linha >= 0; linha--) {
 			int x = 50;
-			for (int coluna = 0; coluna < 7; coluna++) {
+			for (int coluna = 6; coluna >= 0; coluna--) {
 				final Integer auxLinha = linha;
 				final Integer auxColuna = coluna;
 				tabuleiro[linha][coluna] = new JLabel();
