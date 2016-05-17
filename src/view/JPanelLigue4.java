@@ -8,11 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import model.Constantes;
+
 public class JPanelLigue4 extends JPanel {
 	
 	
 		
-	private JLabel tabuleiro[][] = new JLabel[7][7];
+	private JLabel tabuleiro[][] = new JLabel[Constantes.LINHAS][Constantes.COLUNAS];
 	private Icon vazia;
 	private Icon pecaHumano;
 	private Icon pecaPC;
@@ -62,8 +64,8 @@ public class JPanelLigue4 extends JPanel {
 	}
 	
 	public void atualizaTabuleiro(int[][] tabuleiroInterface) {
-		for (int linha = 0; linha < 6; linha++) {
-			for (int coluna = 0; coluna < 7; coluna++) {
+		for (int linha = 0; linha < Constantes.LINHAS; linha++) {
+			for (int coluna = 0; coluna < Constantes.COLUNAS; coluna++) {
 				if(tabuleiroInterface[linha][coluna] == 0){
 					tabuleiro[linha][coluna].setIcon(vazia);
 				}else if(tabuleiroInterface[linha][coluna] == 1){
