@@ -8,8 +8,8 @@ import Excecao.ExceptionJogadaInvalida;
 public class Tabuleiro {
 
 	private int[][] posicoes;
-	private int linhas = 6;
-	private int colunas = 7;
+	private int linhas = Constantes.LINHAS;
+	private int colunas = Constantes.COLUNAS;
 	private int posicoesOcupados;
 
 

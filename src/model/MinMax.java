@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MinMax {
 
-	private int profundidadeMaxima = 10;
+	private int profundidadeMaxima = Constantes.PROFUNDIDADE_MAXIMA;
 	private int[] jogadaRealizar;
 
 	public Tabuleiro buscaMelhorJogada(Tabuleiro tabuleiroAtual) {
@@ -25,7 +25,7 @@ public class MinMax {
 				for (int[] filho : filhosPossiveis) {
 					valorFilho = minMax(nodo.geraFilho(filho, !max), nivel + 1,
 							!max, alpha, beta);
-					if (alpha > valorFilho) {
+					if (alpha < valorFilho) {
 						alpha = valorFilho;
 						if (alpha >= beta) {
 							jogadaRealizar = filho;
