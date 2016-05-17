@@ -31,29 +31,21 @@ public class Nodo {
 
 	private int calculaUtilidade() {
 		int valor = calculaHeuristica();
-		valor += (((tabuleiro.getLinhas() * tabuleiro.getColunas()) - tabuleiro.getPosicoesOcupados()) * 100);
+		if(valor > 0){
+			valor += (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * 100);
+		}else{
+			valor -= (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * 100);
+		}
 		return valor;
 	}
 
 	private int calculaHeuristica() {
-		return getValorColuna() + getValorLinha() + getValorDiagonal();
+		int difDupla = tabuleiro.getDifDupla();
+		int difTripla = tabuleiro.getDifTripla();
+		int difQuadra = tabuleiro.getDifQuadra();
+		return (difDupla * Constantes.VALOR_DUPLA) + (difTripla * Constantes.VALOR_TRIPLA) + (difQuadra * Constantes.VALOR_QUADRA);
 	}
 	
-	private int getValorDiagonal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	private int getValorLinha() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	private int getValorColuna() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	public int getValor() {
 		int valor;
 		if (!tabuleiro.ehFinal())
@@ -68,6 +60,8 @@ public class Nodo {
 	}
 
 	public Nodo geraFilho(int[] filho, boolean jogador) {
+		Tabuleiro aux = new Tabuleiro();
+		aux.CopiaTudo(tabuleiro);
 		tabuleiro.geraJogada(filho[0], filho[1], jogador);
 		//Nao existe necessidade de um novo objeto nodo na memoria, apenas atualizar estado do tabuleiro
 		return this;

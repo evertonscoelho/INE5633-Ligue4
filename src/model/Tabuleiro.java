@@ -1,8 +1,5 @@
 package model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import Excecao.ExceptionJogadaInvalida;
 
 public class Tabuleiro {
@@ -11,15 +8,11 @@ public class Tabuleiro {
 	private int linhas = Constantes.LINHAS;
 	private int colunas = Constantes.COLUNAS;
 	private int posicoesOcupados;
-
-
-	public Tabuleiro(int[][] posicoes, int posicoesOcupados) {
-		this.posicoes = posicoes;
-		this.posicoesOcupados = posicoesOcupados;
-	}
+    private TabuleiroEstado tabuleiroEstado;
 
 	public Tabuleiro() {
 		this.posicoes = new int[linhas][colunas];
+		tabuleiroEstado = new TabuleiroEstado();
 		posicoesOcupados = 0;
 	}
 
@@ -29,6 +22,7 @@ public class Tabuleiro {
 		}else{
 			posicoes[getLinhaJogar(coluna)][coluna] = 2;
 		}
+		tabuleiroEstado.atualizaEstado(getLinhaJogar(coluna),coluna, posicoes);
 		posicoesOcupados++;
 	}
 	
@@ -38,6 +32,7 @@ public class Tabuleiro {
 		}else{
 			posicoes[linha][coluna] = 2;
 		}
+		tabuleiroEstado.atualizaEstado(linha,coluna, posicoes);
 		posicoesOcupados++;
 	}
 
@@ -60,8 +55,7 @@ public class Tabuleiro {
 	}
 
 	public boolean ehFinal() {
-		// TODO Auto-generated method stub
-		return false;
+		return tabuleiroEstado.ehFim();
 	}
 
 
@@ -73,13 +67,28 @@ public class Tabuleiro {
 		return posicoesOcupados;
 	}
 
-	public int getLinhas() {
-		return linhas;
+	public void CopiaTudo(Tabuleiro tabuleiro) {
+		int[][] posicaoAux = tabuleiro.getPosicoes();
+		for (int linha = 0; linha < Constantes.LINHAS; linha++) {
+			for (int coluna = 0; coluna < Constantes.COLUNAS; coluna++) {
+				posicoes[linha][coluna] = posicaoAux[linha][coluna];
+			}
+		}
+		
 	}
 
-	public int getColunas() {
-		return colunas;
+	public int getDifDupla() {
+		return tabuleiroEstado.getDifDupla();
 	}
+
+	public int getDifTripla() {
+		return tabuleiroEstado.getDifTripla();
+	}
+
+	public int getDifQuadra() {
+		return tabuleiroEstado.getDifQuadra();
+	}
+
 
 	
 
