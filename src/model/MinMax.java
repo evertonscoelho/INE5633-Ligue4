@@ -4,57 +4,50 @@ import java.util.List;
 
 public class MinMax {
 
-	private int profundidadeAtual;
 	private int profundidadeMaxima = 10;
+	private int[] jogadaRealizar;
 
 	public Tabuleiro buscaMelhorJogada(Tabuleiro tabuleiroAtual) {
-		profundidadeAtual = 0;
-
-		List<Tabuleiro> jogadas = geraJogadasPossiveis();
-
-		Tabuleiro melhorJogada = null;
-
-		int melhorScore = Integer.MIN_VALUE;
-
-		for (Tabuleiro jogada : jogadas) {
-			int score = partiuProximo(jogada, true);
-			if (score > melhorScore) {
-				melhorScore = score;
-				melhorJogada = jogada;
-			}
-		}
-
-		return melhorJogada;
+		minMax(new Nodo(tabuleiroAtual), 1, true, Double.MIN_VALUE,
+				Double.MAX_VALUE);
+		tabuleiroAtual.geraJogada(jogadaRealizar[0], jogadaRealizar[1], false);
+		return tabuleiroAtual;
 	}
 
-	private List<Tabuleiro> geraJogadasPossiveis() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private int partiuProximo(Tabuleiro jogada, boolean max) {
-
-		if (jogada.ehFinal() || profundidadeAtual == profundidadeMaxima) {
-			return jogada.getValor();
+	private double minMax(Nodo nodo, int nivel, boolean max, double alpha,
+			double beta) {
+		if (nodo.getTabuleiro().ehFinal() || nivel == profundidadeMaxima) {
+			return nodo.getValor();
 		} else {
-			List<Tabuleiro> jogadas = geraJogadasPossiveis();
-
-			int melhorValor;
-			if (max)
-				melhorValor = Integer.MIN_VALUE;
-			else
-				melhorValor = Integer.MAX_VALUE;
-
-			for (Tabuleiro proxTabuleiro : jogadas) {
-				int valor = partiuProximo(proxTabuleiro, !max);
-
-				if ((max && valor > melhorValor) || (!max && valor < melhorValor)) {
-					melhorValor = valor;
+			List<int[]> filhosPossiveis = nodo.geraFilhosPossiveis();
+			double valorFilho;
+			if (max) {
+				for (int[] filho : filhosPossiveis) {
+					valorFilho = minMax(nodo.geraFilho(filho, !max), nivel + 1,
+							!max, alpha, beta);
+					if (alpha > valorFilho) {
+						alpha = valorFilho;
+						if (alpha >= beta) {
+							jogadaRealizar = filho;
+							return alpha;
+						}
+					}
 				}
+				return alpha;
+			} else {
+				for (int[] filho : filhosPossiveis) {
+					valorFilho = minMax(nodo.geraFilho(filho, !max), nivel + 1,
+							!max, alpha, beta);
+					if (beta > valorFilho) {
+						beta = valorFilho;
+						if (alpha >= beta) {
+							jogadaRealizar = filho;
+							return beta;
+						}
+					}
+				}
+				return beta;
 			}
-
-			return melhorValor;
 		}
 	}
-
 }

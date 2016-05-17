@@ -1,6 +1,6 @@
 package main;
 
-import model.Mito;
+import controller.Mito;
 
 public class Vish {
 
