@@ -3,6 +3,8 @@ package model;
 import java.util.LinkedList;
 import java.util.List;
 
+import model.constantes.Constantes;
+
 public class Nodo {
 	
 	Tabuleiro tabuleiro;

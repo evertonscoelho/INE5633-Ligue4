@@ -1,6 +1,8 @@
 package model;
 
 import Excecao.ExceptionJogadaInvalida;
+import model.constantes.Constantes;
+import model.estados.TabuleiroEstado;
 
 public class Tabuleiro {
 

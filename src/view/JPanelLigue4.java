@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.Constantes;
+import model.constantes.Constantes;
 
 public class JPanelLigue4 extends JPanel {
 	

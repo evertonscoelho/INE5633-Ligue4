@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import model.constantes.Constantes;
+
 public class MinMax {
 
 	private int profundidadeMaxima = Constantes.PROFUNDIDADE_MAXIMA;
@@ -25,6 +27,7 @@ public class MinMax {
 				for (int[] filho : filhosPossiveis) {
 					valorFilho = minMax(nodo.geraFilho(filho, false), nivel + 1,
 							!max, alpha, beta);
+					valorFilho /= nivel;
 					if (alpha < valorFilho) {
 						alpha = valorFilho;
 						jogadaRealizar = filho;
@@ -38,6 +41,7 @@ public class MinMax {
 				for (int[] filho : filhosPossiveis) {
 					valorFilho = minMax(nodo.geraFilho(filho, true), nivel + 1,
 							!max, alpha, beta);
+					valorFilho /= nivel;
 					if (beta > valorFilho) {
 						beta = valorFilho;
 						jogadaRealizar = filho;
