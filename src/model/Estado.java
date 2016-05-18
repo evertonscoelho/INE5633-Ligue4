@@ -2,13 +2,23 @@ package model;
 
 public class Estado {
 
-	private int dupla_jogador;
-	private int dupla_pc;
-	private int tripla_jogador;
-	private int tripla_pc;
-	private int quadra_jogador;
-	private int quadra_pc;
+	private int dupla_jogador = 0;
+	private int dupla_pc  = 0;
+	private int tripla_jogador  = 0;
+	private int tripla_pc  = 0;
+	private int quadra_jogador  = 0;
+	private int quadra_pc = 0;
 
+	public Estado(){
+		int dupla_jogador = 0;
+		int dupla_pc = 0;
+		int tripla_jogador = 0;
+		int tripla_pc = 0;
+		int quadra_jogador = 0;
+		int quadra_pc = 0;
+		
+	}
+	
 	public int getDupla_jogador() {
 		return dupla_jogador;
 	}

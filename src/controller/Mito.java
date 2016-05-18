@@ -22,6 +22,8 @@ public class Mito {
 		jframeLigue4 = new JFrameLigue4(this);
 		jframeLigue4.interaja();
 		vezJogador = jframeLigue4.getVezJogador();
+		if(!vezJogador)
+			jogaMito();
 	}
 
 	public void posicaoClicada(int coluna) {
@@ -60,10 +62,17 @@ public class Mito {
 
 	private void jogaMito() {
 		if(!fimDeJogo){
-		    tabuleiroAtual = minMax.buscaMelhorJogada(tabuleiroAtual);
+			
+			int[] jogadaRealizar = minMax.buscaMelhorJogada(tabuleiroAtual.CopiaTudo(tabuleiroAtual));
+			try {
+				tabuleiroAtual.geraJogada(jogadaRealizar[0],  vezJogador);
+			    vezJogador = true;
+			} catch (ExceptionJogadaInvalida e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
 		    verificaFimDeJogo();
-		    vezJogador = true;
 		}    
 	}
 

@@ -36,14 +36,12 @@ public class Nodo {
 		}else{
 			valor -= (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * 100);
 		}
-		return valor;
+		
+		return tabuleiro.calculaUtilidade();
 	}
 
 	private int calculaHeuristica() {
-		int difDupla = tabuleiro.getDifDupla();
-		int difTripla = tabuleiro.getDifTripla();
-		int difQuadra = tabuleiro.getDifQuadra();
-		return (difDupla * Constantes.VALOR_DUPLA) + (difTripla * Constantes.VALOR_TRIPLA) + (difQuadra * Constantes.VALOR_QUADRA);
+		return tabuleiro.calculaHeuristica();
 	}
 	
 	public int getValor() {
@@ -60,9 +58,8 @@ public class Nodo {
 	}
 
 	public Nodo geraFilho(int[] filho, boolean jogador) {
-		Tabuleiro aux = new Tabuleiro();
-		aux.CopiaTudo(tabuleiro);
-		tabuleiro.geraJogada(filho[0], filho[1], jogador);
+		Tabuleiro aux = new Tabuleiro().CopiaTudo(tabuleiro);
+		aux.geraJogada(filho[0], filho[1], jogador);
 		//Nao existe necessidade de um novo objeto nodo na memoria, apenas atualizar estado do tabuleiro
 		return this;
 	}

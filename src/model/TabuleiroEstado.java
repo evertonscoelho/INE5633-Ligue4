@@ -6,13 +6,27 @@ public class TabuleiroEstado {
 	private Estado[] coluna;
 	private Estado[] diagonal;
 	private boolean ehFim;
-	private int seqJog = 0, seqPc = 0, zeroRestante = 0, seqZero = 0;
+	private int seqJog = 0, seqPc = 0, zeroRestante = 0, seqZero = 0, valorPc = 0, ValorJog = 0;
 
 	public TabuleiroEstado() {
 		linha = new Estado[Constantes.LINHAS];
 		coluna = new Estado[Constantes.COLUNAS];
 		diagonal = new Estado[Constantes.DIAGONAIS];
 		ehFim = false;
+		criaEstados();
+	}
+
+	private void criaEstados() {
+		for (int i = 0; i < linha.length; i++) {
+			linha[i] = new Estado();
+		}
+		for (int i = 0; i < coluna.length; i++) {
+			coluna[i] = new Estado();
+		}
+		for (int i = 0; i < diagonal.length; i++) {
+			diagonal[i] = new Estado();
+		}
+
 	}
 
 	public void atualizaEstado(int linhaJogar, int coluna, int[][] posicoes) {
@@ -24,7 +38,7 @@ public class TabuleiroEstado {
 
 	private void atualizaLinha(int linhaJogar, int[][] posicoes) {
 		zeraValores();
-		for (int i = 0; i < coluna.length; i++) {
+		for (int i = 0; i < linha.length; i++) {
 			if (posicoes[linhaJogar][i] == 0) {
 				seqZero++;
 				if (seqJog > 0)
@@ -51,11 +65,17 @@ public class TabuleiroEstado {
 		if (seqJog >= 4) {
 			this.linha[linhaJogar].setQuadra_jogador(1);
 			ehFim = true;
-		} else if (seqJog == 3 && zeroRestante > 0) {
-			this.linha[linhaJogar].setTripla_jogador(1);
-		} else if (seqJog == 2 && zeroRestante > 1) {
-			this.linha[linhaJogar].setDupla_jogador(1);
+			zeraValores();
+		} else if (seqJog == 3 && seqZero > 0) {
+			int tripla_jogador = this.linha[linhaJogar].getTripla_jogador();
+			this.linha[linhaJogar].setTripla_jogador(tripla_jogador++);
+			zeraValores();
+		} else if (seqJog == 2 && seqZero > 1) {
+			int dupla_jogador = this.linha[linhaJogar].getDupla_jogador();
+			this.linha[linhaJogar].setDupla_jogador(dupla_jogador++);
+			zeraValores();
 		}
+
 	}
 
 	private void pecaPcLinha(int linhaJogar) {
@@ -64,15 +84,19 @@ public class TabuleiroEstado {
 			seqZero = 0;
 			seqJog = 0;
 		}
-		seqZero = 0;
 
 		if (seqPc >= 4) {
 			this.linha[linhaJogar].setQuadra_pc(1);
 			ehFim = true;
-		} else if (seqPc == 3 && zeroRestante > 0) {
-			this.linha[linhaJogar].setTripla_pc(1);
-		} else if (seqPc == 2 && zeroRestante > 1) {
-			this.linha[linhaJogar].setDupla_pc(1);
+			zeraValores();
+		} else if (seqPc == 3 && seqZero > 0) {
+			int tripla_pc = this.linha[linhaJogar].getTripla_pc();
+			this.linha[linhaJogar].setTripla_pc(tripla_pc++);
+			zeraValores();
+		} else if (seqPc == 2 && seqZero > 1) {
+			int dupla_pc = this.linha[linhaJogar].getDupla_pc();
+			this.linha[linhaJogar].setDupla_pc(dupla_pc++);
+			zeraValores();
 		}
 	}
 
@@ -95,6 +119,7 @@ public class TabuleiroEstado {
 		seqJog = 0;
 		seqPc = 0;
 		zeroRestante = 0;
+		seqZero = 0;
 	}
 
 	private void acabouPercorrerColuna(int indiceColuna) {
@@ -143,13 +168,13 @@ public class TabuleiroEstado {
 	public int getDifDupla() {
 		int difDupla = 0;
 		for (Estado estado : linha) {
-			difDupla += estado.getDupla_pc() -estado.getDupla_jogador();
+			difDupla += estado.getDupla_pc() - estado.getDupla_jogador();
 		}
 		for (Estado estado : coluna) {
-			difDupla += estado.getDupla_pc() -estado.getDupla_jogador();
+			difDupla += estado.getDupla_pc() - estado.getDupla_jogador();
 		}
 		for (Estado estado : diagonal) {
-			difDupla += estado.getDupla_pc() -estado.getDupla_jogador();
+			difDupla += estado.getDupla_pc() - estado.getDupla_jogador();
 		}
 		return difDupla;
 	}
@@ -157,13 +182,13 @@ public class TabuleiroEstado {
 	public int getDifTripla() {
 		int difTripla = 0;
 		for (Estado estado : linha) {
-			difTripla += estado.getTripla_pc() -estado.getTripla_jogador();
+			difTripla += estado.getTripla_pc() - estado.getTripla_jogador();
 		}
 		for (Estado estado : coluna) {
-			difTripla += estado.getTripla_pc() -estado.getTripla_jogador();
+			difTripla += estado.getTripla_pc() - estado.getTripla_jogador();
 		}
 		for (Estado estado : diagonal) {
-			difTripla += estado.getTripla_pc() -estado.getTripla_jogador();
+			difTripla += estado.getTripla_pc() - estado.getTripla_jogador();
 		}
 		return difTripla;
 	}
@@ -171,13 +196,13 @@ public class TabuleiroEstado {
 	public int getDifQuadra() {
 		int difQuadra = 0;
 		for (Estado estado : linha) {
-			difQuadra += estado.getQuadra_pc() -estado.getQuadra_jogador();
+			difQuadra += estado.getQuadra_pc() - estado.getQuadra_jogador();
 		}
 		for (Estado estado : coluna) {
-			difQuadra += estado.getQuadra_pc() -estado.getQuadra_jogador();
+			difQuadra += estado.getQuadra_pc() - estado.getQuadra_jogador();
 		}
 		for (Estado estado : diagonal) {
-			difQuadra += estado.getQuadra_pc() -estado.getQuadra_jogador();
+			difQuadra += estado.getQuadra_pc() - estado.getQuadra_jogador();
 		}
 		return difQuadra;
 	}

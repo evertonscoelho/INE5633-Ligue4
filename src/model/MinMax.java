@@ -7,11 +7,10 @@ public class MinMax {
 	private int profundidadeMaxima = Constantes.PROFUNDIDADE_MAXIMA;
 	private int[] jogadaRealizar;
 
-	public Tabuleiro buscaMelhorJogada(Tabuleiro tabuleiroAtual) {
+	public int[] buscaMelhorJogada(Tabuleiro tabuleiroAtual) {
 		minMax(new Nodo(tabuleiroAtual), 1, true, Double.MIN_VALUE,
 				Double.MAX_VALUE);
-		tabuleiroAtual.geraJogada(jogadaRealizar[0], jogadaRealizar[1], false);
-		return tabuleiroAtual;
+		return jogadaRealizar;
 	}
 
 	private double minMax(Nodo nodo, int nivel, boolean max, double alpha,
