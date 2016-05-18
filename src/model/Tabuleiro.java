@@ -10,17 +10,14 @@ public class Tabuleiro {
 	private int posicoesOcupados;
 	private int seqJog = 0, seqPc = 0, seqZero = 0, valor = 0;
 	private boolean ehFim;
-	private TabuleiroEstado tabuleiroEstado;
 
 	public Tabuleiro() {
 		this.posicoes = new int[linhas][colunas];
-		tabuleiroEstado = new TabuleiroEstado();
 		posicoesOcupados = 0;
 	}
 
-	public Tabuleiro(int[][] posicoes, int poscioesocupadas, TabuleiroEstado tabuleiroestado) {
+	public Tabuleiro(int[][] posicoes, int poscioesocupadas) {
 		this.posicoes = posicoes;
-		tabuleiroEstado = tabuleiroestado;
 		posicoesOcupados = poscioesocupadas;
 	}
 
@@ -30,7 +27,6 @@ public class Tabuleiro {
 		} else {
 			posicoes[getLinhaJogar(coluna)][coluna] = 2;
 		}
-		tabuleiroEstado.atualizaEstado(getLinhaJogar(coluna), coluna, posicoes);
 		posicoesOcupados++;
 	}
 
@@ -40,7 +36,6 @@ public class Tabuleiro {
 		} else {
 			posicoes[linha][coluna] = 2;
 		}
-		tabuleiroEstado.atualizaEstado(linha, coluna, posicoes);
 		posicoesOcupados++;
 	}
 
@@ -63,7 +58,7 @@ public class Tabuleiro {
 	}
 
 	public boolean ehFinal() {
-		return tabuleiroEstado.ehFim();
+		return ehFim;
 	}
 
 	public int[][] getPosicoes() {
@@ -82,7 +77,7 @@ public class Tabuleiro {
 			}
 		}
 
-		Tabuleiro tabuleiroNovo = new Tabuleiro(posicoes, this.posicoesOcupados, this.tabuleiroEstado);
+		Tabuleiro tabuleiroNovo = new Tabuleiro(posicoes, this.posicoesOcupados);
 		this.posicoes = posicaoAux;
 		return tabuleiroNovo;
 	}
