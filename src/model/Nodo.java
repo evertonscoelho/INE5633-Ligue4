@@ -60,11 +60,9 @@ public class Nodo {
 	}
 
 	public Nodo geraFilho(int[] filho, boolean jogador) {
-		Tabuleiro aux = new Tabuleiro();
-		aux.CopiaTudo(tabuleiro);
-		tabuleiro.geraJogada(filho[0], filho[1], jogador);
-		//Nao existe necessidade de um novo objeto nodo na memoria, apenas atualizar estado do tabuleiro
-		return this;
+		Tabuleiro aux = tabuleiro.copiaTudo();
+		aux.geraJogada(filho[0], filho[1], jogador);
+		return new Nodo(aux);
 	}
 
 

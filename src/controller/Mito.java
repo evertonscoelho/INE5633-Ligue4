@@ -22,6 +22,9 @@ public class Mito {
 		jframeLigue4 = new JFrameLigue4(this);
 		jframeLigue4.interaja();
 		vezJogador = jframeLigue4.getVezJogador();
+		if(!vezJogador){
+			jogaMito();
+		}
 	}
 
 	public void posicaoClicada(int coluna) {

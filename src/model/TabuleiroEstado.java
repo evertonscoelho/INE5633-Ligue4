@@ -12,7 +12,50 @@ public class TabuleiroEstado {
 		linha = new Estado[Constantes.LINHAS];
 		coluna = new Estado[Constantes.COLUNAS];
 		diagonal = new Estado[Constantes.DIAGONAIS];
+		init();
 		ehFim = false;
+	}
+	
+	public TabuleiroEstado copiaEstado(){
+		TabuleiroEstado aux = new TabuleiroEstado();
+		for(int i = 0; i < linha.length; i++){
+			aux.setLinha(i, new Estado(linha[i].getDupla_jogador(), linha[i].getDupla_pc(), linha[i].getTripla_jogador(),
+					 linha[i].getTripla_pc(), linha[i].getQuadra_jogador(), linha[i].getQuadra_pc()));
+		}
+		for(int i = 0; i < coluna.length; i++){
+			aux.setColuna(i, new Estado(coluna[i].getDupla_jogador(), coluna[i].getDupla_pc(), coluna[i].getTripla_jogador(),
+					coluna[i].getTripla_pc(), coluna[i].getQuadra_jogador(), coluna[i].getQuadra_pc()));
+		}
+		for(int i = 0; i < diagonal.length; i++){
+			aux.setDiagonal(i, new Estado(diagonal[i].getDupla_jogador(), diagonal[i].getDupla_pc(), diagonal[i].getTripla_jogador(),
+					diagonal[i].getTripla_pc(), diagonal[i].getQuadra_jogador(), diagonal[i].getQuadra_pc()));
+		}
+		return aux;
+	}
+
+	private void setDiagonal(int i, Estado estado) {
+		diagonal[i] = estado;
+		
+	}
+
+	private void setColuna(int i, Estado estado) {
+		coluna[i] = estado;
+	}
+
+	private void setLinha(int i, Estado estado) {
+		linha[i] = estado;
+	}
+
+	private void init() {
+		for(int i = 0; i < linha.length; i++){
+			linha[i] = new Estado();
+		}
+		for(int i = 0; i < coluna.length; i++){
+			coluna[i] = new Estado();
+		}
+		for(int i = 0; i < diagonal.length; i++){
+			diagonal[i] = new Estado();
+		}
 	}
 
 	public void atualizaEstado(int linhaJogar, int coluna, int[][] posicoes) {
@@ -137,7 +180,8 @@ public class TabuleiroEstado {
 	}
 
 	public boolean ehFim() {
-		return ehFim;
+	//	return ehFim;
+		return false;
 	}
 
 	public int getDifDupla() {

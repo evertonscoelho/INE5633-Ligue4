@@ -16,6 +16,12 @@ public class Tabuleiro {
 		posicoesOcupados = 0;
 	}
 
+	public Tabuleiro(int[][] posicaoAux, int posicoesOcupados, TabuleiroEstado tabuleiroEstado) {
+		posicoes = posicaoAux;
+		this.posicoesOcupados = posicoesOcupados;
+		this.tabuleiroEstado = tabuleiroEstado;
+	}
+
 	public void geraJogada(int coluna, boolean jogador) throws ExceptionJogadaInvalida {
 		if(jogador){
 			posicoes[getLinhaJogar(coluna)][coluna] = 1;
@@ -67,13 +73,15 @@ public class Tabuleiro {
 		return posicoesOcupados;
 	}
 
-	public void CopiaTudo(Tabuleiro tabuleiro) {
-		int[][] posicaoAux = tabuleiro.getPosicoes();
+	public Tabuleiro copiaTudo() {
+		int[][] posicaoAux = new int[linhas][colunas];
 		for (int linha = 0; linha < Constantes.LINHAS; linha++) {
 			for (int coluna = 0; coluna < Constantes.COLUNAS; coluna++) {
-				posicoes[linha][coluna] = posicaoAux[linha][coluna];
+				posicaoAux[linha][coluna] = posicoes[linha][coluna];
 			}
 		}
+		Tabuleiro aux = new Tabuleiro(posicaoAux, posicoesOcupados, tabuleiroEstado.copiaEstado());
+		return aux;
 		
 	}
 

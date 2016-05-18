@@ -23,12 +23,12 @@ public class MinMax {
 			double valorFilho;
 			if (max) {
 				for (int[] filho : filhosPossiveis) {
-					valorFilho = minMax(nodo.geraFilho(filho, !max), nivel + 1,
+					valorFilho = minMax(nodo.geraFilho(filho, false), nivel + 1,
 							!max, alpha, beta);
 					if (alpha < valorFilho) {
 						alpha = valorFilho;
+						jogadaRealizar = filho;
 						if (alpha >= beta) {
-							jogadaRealizar = filho;
 							return alpha;
 						}
 					}
@@ -36,12 +36,12 @@ public class MinMax {
 				return alpha;
 			} else {
 				for (int[] filho : filhosPossiveis) {
-					valorFilho = minMax(nodo.geraFilho(filho, !max), nivel + 1,
+					valorFilho = minMax(nodo.geraFilho(filho, true), nivel + 1,
 							!max, alpha, beta);
 					if (beta > valorFilho) {
 						beta = valorFilho;
+						jogadaRealizar = filho;
 						if (alpha >= beta) {
-							jogadaRealizar = filho;
 							return beta;
 						}
 					}

@@ -9,6 +9,22 @@ public class Estado {
 	private int quadra_jogador;
 	private int quadra_pc;
 
+	
+	public Estado(int dupla_jogador, int dupla_pc, int tripla_jogador,
+			int tripla_pc, int quadra_jogador, int quadra_pc) {
+		super();
+		this.dupla_jogador = dupla_jogador;
+		this.dupla_pc = dupla_pc;
+		this.tripla_jogador = tripla_jogador;
+		this.tripla_pc = tripla_pc;
+		this.quadra_jogador = quadra_jogador;
+		this.quadra_pc = quadra_pc;
+	}
+	
+	public Estado(){
+		//TODO
+	}
+	
 	public int getDupla_jogador() {
 		return dupla_jogador;
 	}
