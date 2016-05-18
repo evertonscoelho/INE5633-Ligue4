@@ -51,7 +51,7 @@ public class Mito {
 	private void verificaFimDeJogo() {
 		if(tabuleiroAtual.ehFinal()){
 			fimDeJogo = true;
-			if(vezJogador){
+			if(!vezJogador){
 				jframeLigue4.mostraMensagem("Jogo acabou, você ganhou");
 			}else{
 				jframeLigue4.mostraMensagem("Jogo acabou, mito ganhou");

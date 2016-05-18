@@ -9,7 +9,7 @@ public final class Constantes {
 	public static final int VALOR_TRIPLA = 20;
 	public static final int VALOR_QUADRA = 10000;
 	public static final int VALOR_CASA_VAZIA = 100;
-	public static final int PROFUNDIDADE_MAXIMA = 5;
+	public static final int PROFUNDIDADE_MAXIMA = 10;
 	
 }
 
