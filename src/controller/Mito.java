@@ -22,7 +22,7 @@ public class Mito {
 		jframeLigue4 = new JFrameLigue4(this);
 		jframeLigue4.interaja();
 		vezJogador = jframeLigue4.getVezJogador();
-		if(!vezJogador){
+		if (!vezJogador) {
 			jogaMito();
 		}
 	}
@@ -33,14 +33,15 @@ public class Mito {
 			if (vezJogador) {
 				try {
 					tabuleiroAtual.geraJogada(coluna, vezJogador);
+
+					// atualiza tabuleiro na tela
+					jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
+					verificaFimDeJogo();
+					vezJogador = false;
+					jogaMito();
 				} catch (ExceptionJogadaInvalida e) {
 					jframeLigue4.mostraMensagem("Jogada invalida");
 				}
-				// atualiza tabuleiro na tela
-				jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
-				verificaFimDeJogo();
-				vezJogador = false;
-				jogaMito();
 			} else {
 				jframeLigue4.mostraMensagem("Aguarde o MITO jogar");
 			}
@@ -50,24 +51,24 @@ public class Mito {
 	}
 
 	private void verificaFimDeJogo() {
-		if(tabuleiroAtual.ehFinal()){
+		if (tabuleiroAtual.ehFinal()) {
 			fimDeJogo = true;
-			if(vezJogador){
+			if (vezJogador) {
 				jframeLigue4.mostraMensagem("Jogo acabou, você ganhou");
-			}else{
+			} else {
 				jframeLigue4.mostraMensagem("Jogo acabou, mito ganhou");
 			}
-			
+
 		}
 	}
 
 	private void jogaMito() {
-		if(!fimDeJogo){
-		    tabuleiroAtual = minMax.buscaMelhorJogada(tabuleiroAtual);
-		    jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
-		    verificaFimDeJogo();
-		    vezJogador = true;
-		}    
+		if (!fimDeJogo) {
+			tabuleiroAtual = minMax.buscaMelhorJogada(tabuleiroAtual);
+			jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
+			verificaFimDeJogo();
+			vezJogador = true;
+		}
 	}
 
 }

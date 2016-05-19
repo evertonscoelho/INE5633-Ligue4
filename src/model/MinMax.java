@@ -27,7 +27,7 @@ public class MinMax {
 				for (int[] filho : filhosPossiveis) {
 					valorFilho = minMax(nodo.geraFilho(filho, false), nivel + 1,
 							!max, alpha, beta);
-					valorFilho /= nivel;
+					valorFilho = valorFilho / ( nivel*0.05);
 					if (alpha < valorFilho) {
 						alpha = valorFilho;
 						jogadaRealizar = filho;
@@ -41,7 +41,7 @@ public class MinMax {
 				for (int[] filho : filhosPossiveis) {
 					valorFilho = minMax(nodo.geraFilho(filho, true), nivel + 1,
 							!max, alpha, beta);
-					valorFilho /= nivel;
+					valorFilho = valorFilho / ( nivel*0.05);
 					if (beta > valorFilho) {
 						beta = valorFilho;
 						jogadaRealizar = filho;

@@ -25,12 +25,13 @@ public class Tabuleiro {
 	}
 
 	public void geraJogada(int coluna, boolean jogador) throws ExceptionJogadaInvalida {
+		int linhaJogar = getLinhaJogar(coluna);
 		if(jogador){
-			posicoes[getLinhaJogar(coluna)][coluna] = 1;
+			posicoes[linhaJogar][coluna] = 1;
 		}else{
-			posicoes[getLinhaJogar(coluna)][coluna] = 2;
+			posicoes[linhaJogar][coluna] = 2;
 		}
-		tabuleiroEstado.atualizaEstado(getLinhaJogar(coluna),coluna, posicoes);
+		tabuleiroEstado.atualizaEstado(linhaJogar,coluna, posicoes);
 		posicoesOcupados++;
 	}
 	

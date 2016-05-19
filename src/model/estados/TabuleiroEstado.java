@@ -89,7 +89,7 @@ public class TabuleiroEstado {
 
 	private void pcLinha(int linhaJogar) {
 		if (seqJog > 0) {
-			if (seqJog >= 4) {
+			if (seqJog >= 4 && seqZero ==0) {
 				linha[linhaJogar].setQuadra_jogador(1);
 				ehFim = true;
 			} else if (seqJog == 3 && zeroAntes >= 1) {
