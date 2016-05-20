@@ -1,4 +1,4 @@
-package model;
+package model.estados;
 
 public class EstadoSituacao {
 

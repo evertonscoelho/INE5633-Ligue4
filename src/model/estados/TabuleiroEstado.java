@@ -10,9 +10,9 @@ public class TabuleiroEstado {
 	private boolean ehFim;
 
 	public TabuleiroEstado() {
-		this.estadoLinha = new Estado();
-		this.estadoColuna = new Estado();
-		this.estadoDiagonal = new Estado();
+		this.estadoLinha = new Estado(EnumTipoEstado.LINHA, this);
+		this.estadoColuna = new Estado(EnumTipoEstado.COLUNA, this);
+		this.estadoDiagonal = new Estado(EnumTipoEstado.DIAGONAL, this);
 		this.ehFim = false;
 	}
 
@@ -23,7 +23,13 @@ public class TabuleiroEstado {
 	}
 
 	public TabuleiroEstado copiaEstado() {
-		return new TabuleiroEstado(this.estadoLinha.copiaEstado(), this.estadoColuna.copiaEstado(), this.estadoDiagonal.copiaEstado());
+		TabuleiroEstado tabuleiroEstado = new TabuleiroEstado(this.estadoLinha.copiaEstado(EnumTipoEstado.LINHA), this.estadoColuna.copiaEstado(EnumTipoEstado.COLUNA),
+				this.estadoDiagonal.copiaEstado(EnumTipoEstado.DIAGONAL));
+		tabuleiroEstado.estadoLinha.setTabuleiroEstado(this);
+		tabuleiroEstado.estadoColuna.setTabuleiroEstado(this);
+		tabuleiroEstado.estadoDiagonal.setTabuleiroEstado(this);
+		return tabuleiroEstado;
+
 	}
 
 	public void atualizaEstado(int linhaJogar, int coluna, int[][] posicoes) {
@@ -36,8 +42,8 @@ public class TabuleiroEstado {
 		return this.ehFim;
 	}
 
-	public void setFim(boolean ehFim) {
-		this.ehFim = ehFim;
+	public void setFim() {
+		this.ehFim = true;
 	}
 
 	public int getDifDupla() {
