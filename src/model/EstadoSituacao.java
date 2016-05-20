@@ -1,6 +1,6 @@
 package model;
 
-public class Estado {
+public class EstadoSituacao {
 
 	private int dupla_jogador;
 	private int dupla_pc;
@@ -10,7 +10,7 @@ public class Estado {
 	private int quadra_pc;
 
 	
-	public Estado(int dupla_jogador, int dupla_pc, int tripla_jogador,
+	public EstadoSituacao(int dupla_jogador, int dupla_pc, int tripla_jogador,
 			int tripla_pc, int quadra_jogador, int quadra_pc) {
 		super();
 		this.dupla_jogador = dupla_jogador;
@@ -21,7 +21,7 @@ public class Estado {
 		this.quadra_pc = quadra_pc;
 	}
 	
-	public Estado(){
+	public EstadoSituacao(){
 		//TODO
 	}
 	
