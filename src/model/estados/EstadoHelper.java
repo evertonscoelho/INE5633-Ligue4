@@ -4,18 +4,17 @@ public class EstadoHelper {
 
 	EstadoSituacao[] estadoSituacao;
 	Estado estado;
-	boolean ultimoVazio;
-	boolean ultimoJogador;
-	boolean ultimoPC;
 	int seqJogador;
 	int seqPC;
 	int seqVazio;
+	int seqVazioAnterior;
 	int indice;
 
 	public EstadoSituacao[] atualizaEstado(int[] posicoes, EstadoSituacao[] estadoSituacaos, Estado estado, int indice) {
 		this.estadoSituacao = estadoSituacaos;
 		this.indice = indice;
 		this.estado = estado;
+		zeraValores();
 		for (int posicao : posicoes) {
 			if (posicao == 0) {
 				this.leuZero();
@@ -29,18 +28,38 @@ public class EstadoHelper {
 		return this.estadoSituacao;
 	}
 
+	private void zeraValores() {
+		estadoSituacao[indice].setDupla_jogador(0);
+		estadoSituacao[indice].setDupla_pc(0);
+		estadoSituacao[indice].setTripla_jogador(0);
+		estadoSituacao[indice].setTripla_pc(0);
+		estadoSituacao[indice].setQuadra_jogador(0);
+		estadoSituacao[indice].setQuadra_pc(0);
+	}
+
 	private void fimLeitura() {
-		this.descobreSeq(this.seqPC, this.seqVazio, false);
-		this.descobreSeq(this.seqJogador, this.seqVazio, true);
+		this.descobreSeq(this.seqPC, this.seqVazio+seqVazioAnterior, false);
+		this.descobreSeq(this.seqJogador, this.seqVazio+seqVazioAnterior, true);
 	}
 
 	private void leuPc() {
-		// TODO Auto-generated method stub
-
+		if(seqJogador >= 2){
+			this.descobreSeq(this.seqPC, this.seqVazio+seqVazioAnterior, false);
+		}
+		seqVazioAnterior = seqVazio;
+		seqVazio = 0;
+		seqJogador = 0;
+		seqPC++;
 	}
 
 	private void leuJogador() {
-		// TODO Auto-generated method stub
+		if(seqPC >= 2){
+			this.descobreSeq(this.seqJogador, this.seqVazio+seqVazioAnterior, true);
+		}
+		seqVazioAnterior = seqVazio;
+		seqVazio = 0;
+		seqPC = 0;
+		seqJogador++;
 
 	}
 
