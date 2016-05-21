@@ -116,7 +116,7 @@ public class Estado {
 			posicoesDiagonal[1] = posicoes[2][1];
 			posicoesDiagonal[2] = posicoes[3][2];
 			posicoesDiagonal[3] = posicoes[4][3];
-			posicoesDiagonal[3] = posicoes[5][4];
+			posicoesDiagonal[4] = posicoes[5][4];
 			diagonal = new DiagonaisDTO(posicoesDiagonal, 4);
 			retorno.add(diagonal);
 		} else if (linhaJogar - coluna == 2) {
@@ -154,7 +154,7 @@ public class Estado {
 			posicoesDiagonal[2] = posicoes[3][2];
 			posicoesDiagonal[3] = posicoes[2][3];
 			posicoesDiagonal[4] = posicoes[1][4];
-			posicoesDiagonal[4] = posicoes[0][5];
+			posicoesDiagonal[5] = posicoes[0][5];
 			diagonal = new DiagonaisDTO(posicoesDiagonal, 8);
 			retorno.add(diagonal);
 		} else if (linhaJogar + coluna == 6) {
@@ -164,7 +164,7 @@ public class Estado {
 			posicoesDiagonal[2] = posicoes[3][3];
 			posicoesDiagonal[3] = posicoes[2][4];
 			posicoesDiagonal[4] = posicoes[1][5];
-			posicoesDiagonal[4] = posicoes[0][6];
+			posicoesDiagonal[5] = posicoes[0][6];
 			diagonal = new DiagonaisDTO(posicoesDiagonal, 9);
 			retorno.add(diagonal);
 		} else if (linhaJogar + coluna == 7) {
