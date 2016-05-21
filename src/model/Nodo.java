@@ -34,9 +34,9 @@ public class Nodo {
 	private int calculaUtilidade() {
 		int valor = calculaHeuristica();
 		if(valor > 0){
-			valor += (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * 100);
+			valor += (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * Constantes.VALOR_CASA_VAZIA);
 		}else{
-			valor -= (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * 100);
+			valor -= (((Constantes.LINHAS * Constantes.COLUNAS) - tabuleiro.getPosicoesOcupados()) * Constantes.VALOR_CASA_VAZIA);
 		}
 		return valor;
 	}
