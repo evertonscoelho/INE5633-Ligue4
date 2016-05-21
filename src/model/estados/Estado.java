@@ -30,8 +30,10 @@ public class Estado {
 	public Estado copiaEstado(EnumTipoEstado enumTipoEstado) {
 		Estado aux = new Estado(enumTipoEstado, this.tabuleiroEstado);
 		for (int i = 0; i < this.estado.length; i++) {
-			aux.setEstadoSituacao(i, new EstadoSituacao(this.estado[i].getDupla_jogador(), this.estado[i].getDupla_pc(), this.estado[i].getTripla_jogador(),
-					this.estado[i].getTripla_pc(), this.estado[i].getQuadra_jogador(), this.estado[i].getQuadra_pc()));
+			aux.setEstadoSituacao(i,
+					new EstadoSituacao(this.estado[i].getDupla_jogador(), this.estado[i].getDupla_pc(),
+							this.estado[i].getTripla_jogador(), this.estado[i].getTripla_pc(),
+							this.estado[i].getQuadra_jogador(), this.estado[i].getQuadra_pc()));
 		}
 		return aux;
 	}
@@ -54,10 +56,11 @@ public class Estado {
 			this.estado = estadoHelper.atualizaEstado(posicoesColuna, this.estado, this, coluna);
 			break;
 		case DIAGONAL:
-			/*LinkedList<DiagonaisDTO>  diagonais = getDiagonais(posicoes);
-			for(DiagonaisDTO diagonaisDTO : diagonais){
-				this.estado = estadoHelper.atualizaEstado(diagonaisDTO.getPosicoes(), this.estado, this, diagonaisDTO.getId());	
-			}*/
+			LinkedList<DiagonaisDTO> diagonais = getDiagonais(posicoes, linhaJogar, coluna);
+			for (DiagonaisDTO diagonaisDTO : diagonais) {
+				this.estado = estadoHelper.atualizaEstado(diagonaisDTO.getPosicoes(), this.estado, this,
+						diagonaisDTO.getId());
+			}
 			break;
 
 		default:
@@ -65,11 +68,126 @@ public class Estado {
 		}
 	}
 
-	private LinkedList<DiagonaisDTO>  getDiagonais(int[][] posicoes) {
+	private LinkedList<DiagonaisDTO> getDiagonais(int[][] posicoes, int linhaJogar, int coluna) {
 		LinkedList<DiagonaisDTO> retorno = new LinkedList<DiagonaisDTO>();
-		//BOTA LOGICA AQUI PEDRINHO
-		
+
+		// direita pra esquerda diagonais
+		int[] posicoesDiagonal;
+		DiagonaisDTO diagonal;
+		if (linhaJogar - coluna == -1) {
+			posicoesDiagonal = new int[5];
+			posicoesDiagonal[0] = posicoes[0][1];
+			posicoesDiagonal[1] = posicoes[1][2];
+			posicoesDiagonal[2] = posicoes[3][4];
+			posicoesDiagonal[3] = posicoes[4][5];
+			posicoesDiagonal[4] = posicoes[5][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 0);
+			retorno.add(diagonal);
+		} else if (linhaJogar - coluna == -2) {
+			posicoesDiagonal = new int[5];
+			posicoesDiagonal[0] = posicoes[0][2];
+			posicoesDiagonal[1] = posicoes[1][3];
+			posicoesDiagonal[2] = posicoes[2][4];
+			posicoesDiagonal[3] = posicoes[3][5];
+			posicoesDiagonal[4] = posicoes[4][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 1);
+			retorno.add(diagonal);
+		} else if (linhaJogar - coluna == -3) {
+			posicoesDiagonal = new int[4];
+			posicoesDiagonal[0] = posicoes[0][3];
+			posicoesDiagonal[1] = posicoes[1][4];
+			posicoesDiagonal[2] = posicoes[2][5];
+			posicoesDiagonal[3] = posicoes[3][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 2);
+			retorno.add(diagonal);
+		} else if (linhaJogar - coluna == 0) {
+			posicoesDiagonal = new int[6];
+			posicoesDiagonal[0] = posicoes[0][0];
+			posicoesDiagonal[1] = posicoes[1][1];
+			posicoesDiagonal[2] = posicoes[2][2];
+			posicoesDiagonal[3] = posicoes[3][3];
+			posicoesDiagonal[4] = posicoes[4][4];
+			posicoesDiagonal[5] = posicoes[5][5];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 3);
+			retorno.add(diagonal);
+		} else if (linhaJogar - coluna == 1) {
+			posicoesDiagonal = new int[5];
+			posicoesDiagonal[0] = posicoes[1][0];
+			posicoesDiagonal[1] = posicoes[2][1];
+			posicoesDiagonal[2] = posicoes[3][2];
+			posicoesDiagonal[3] = posicoes[4][3];
+			posicoesDiagonal[3] = posicoes[5][4];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 4);
+			retorno.add(diagonal);
+		} else if (linhaJogar - coluna == 2) {
+			posicoesDiagonal = new int[4];
+			posicoesDiagonal[0] = posicoes[2][0];
+			posicoesDiagonal[1] = posicoes[3][1];
+			posicoesDiagonal[2] = posicoes[4][2];
+			posicoesDiagonal[3] = posicoes[5][3];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 5);
+			retorno.add(diagonal);
+		}
+
+		// esquerda pra direita diagonais
+		if (linhaJogar + coluna == 3) {
+			posicoesDiagonal = new int[4];
+			posicoesDiagonal[0] = posicoes[3][0];
+			posicoesDiagonal[1] = posicoes[2][1];
+			posicoesDiagonal[2] = posicoes[1][2];
+			posicoesDiagonal[3] = posicoes[0][3];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 6);
+			retorno.add(diagonal);
+		} else if (linhaJogar + coluna == 4) {
+			posicoesDiagonal = new int[5];
+			posicoesDiagonal[0] = posicoes[4][0];
+			posicoesDiagonal[1] = posicoes[3][1];
+			posicoesDiagonal[2] = posicoes[2][2];
+			posicoesDiagonal[3] = posicoes[1][3];
+			posicoesDiagonal[4] = posicoes[0][4];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 7);
+			retorno.add(diagonal);
+		} else if (linhaJogar + coluna == 5) {
+			posicoesDiagonal = new int[6];
+			posicoesDiagonal[0] = posicoes[5][0];
+			posicoesDiagonal[1] = posicoes[4][1];
+			posicoesDiagonal[2] = posicoes[3][2];
+			posicoesDiagonal[3] = posicoes[2][3];
+			posicoesDiagonal[4] = posicoes[1][4];
+			posicoesDiagonal[4] = posicoes[0][5];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 8);
+			retorno.add(diagonal);
+		} else if (linhaJogar + coluna == 6) {
+			posicoesDiagonal = new int[6];
+			posicoesDiagonal[0] = posicoes[5][1];
+			posicoesDiagonal[1] = posicoes[4][2];
+			posicoesDiagonal[2] = posicoes[3][3];
+			posicoesDiagonal[3] = posicoes[2][4];
+			posicoesDiagonal[4] = posicoes[1][5];
+			posicoesDiagonal[4] = posicoes[0][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 9);
+			retorno.add(diagonal);
+		} else if (linhaJogar + coluna == 7) {
+			posicoesDiagonal = new int[5];
+			posicoesDiagonal[0] = posicoes[5][2];
+			posicoesDiagonal[1] = posicoes[4][3];
+			posicoesDiagonal[2] = posicoes[3][4];
+			posicoesDiagonal[3] = posicoes[2][5];
+			posicoesDiagonal[4] = posicoes[1][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 10);
+			retorno.add(diagonal);
+		} else if (linhaJogar + coluna == 8) {
+			posicoesDiagonal = new int[4];
+			posicoesDiagonal[0] = posicoes[5][3];
+			posicoesDiagonal[1] = posicoes[4][4];
+			posicoesDiagonal[2] = posicoes[3][5];
+			posicoesDiagonal[3] = posicoes[2][6];
+			diagonal = new DiagonaisDTO(posicoesDiagonal, 11);
+			retorno.add(diagonal);
+		}
+
 		return retorno;
+
 	}
 
 	public int getDifDupla() {
