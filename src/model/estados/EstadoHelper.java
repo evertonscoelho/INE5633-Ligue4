@@ -44,7 +44,7 @@ public class EstadoHelper {
 
 	private void leuPc() {
 		if(seqJogador >= 2){
-			this.descobreSeq(this.seqPC, this.seqVazio+seqVazioAnterior, false);
+			this.descobreSeq(this.seqJogador, this.seqVazio+seqVazioAnterior, true);
 		}
 		seqVazioAnterior = seqVazio;
 		seqVazio = 0;
@@ -54,7 +54,7 @@ public class EstadoHelper {
 
 	private void leuJogador() {
 		if(seqPC >= 2){
-			this.descobreSeq(this.seqJogador, this.seqVazio+seqVazioAnterior, true);
+			this.descobreSeq(this.seqPC, this.seqVazio+seqVazioAnterior, false);
 		}
 		seqVazioAnterior = seqVazio;
 		seqVazio = 0;
@@ -79,23 +79,23 @@ public class EstadoHelper {
 		}
 		if (jog) {
 			if (quadra) {
-				this.estadoSituacao[this.indice].setQuadra_jogador(this.estadoSituacao[this.indice].getQuadra_jogador());
+				this.estadoSituacao[this.indice].setQuadra_jogador(this.estadoSituacao[this.indice].getQuadra_jogador()+1);
 			}
 			if (tripla) {
-				this.estadoSituacao[this.indice].setTripla_jogador(this.estadoSituacao[this.indice].getTripla_jogador());
+				this.estadoSituacao[this.indice].setTripla_jogador(this.estadoSituacao[this.indice].getTripla_jogador()+1);
 			}
 			if (dupla) {
-				this.estadoSituacao[this.indice].setDupla_jogador(this.estadoSituacao[this.indice].getDupla_jogador());
+				this.estadoSituacao[this.indice].setDupla_jogador(this.estadoSituacao[this.indice].getDupla_jogador()+1);
 			}
 		} else {
 			if (quadra) {
-				this.estadoSituacao[this.indice].setQuadra_pc(this.estadoSituacao[this.indice].getQuadra_pc());
+				this.estadoSituacao[this.indice].setQuadra_pc(this.estadoSituacao[this.indice].getQuadra_pc()+1);
 			}
 			if (tripla) {
-				this.estadoSituacao[this.indice].setTripla_pc(this.estadoSituacao[this.indice].getTripla_pc());
+				this.estadoSituacao[this.indice].setTripla_pc(this.estadoSituacao[this.indice].getTripla_pc()+1);
 			}
 			if (dupla) {
-				this.estadoSituacao[this.indice].setDupla_pc(this.estadoSituacao[this.indice].getDupla_pc());
+				this.estadoSituacao[this.indice].setDupla_pc(this.estadoSituacao[this.indice].getDupla_pc()+1);
 			}
 		}
 	}

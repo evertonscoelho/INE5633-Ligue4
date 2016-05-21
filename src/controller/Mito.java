@@ -33,7 +33,6 @@ public class Mito {
 			if (vezJogador) {
 				try {
 					tabuleiroAtual.geraJogada(coluna, vezJogador);
-
 					// atualiza tabuleiro na tela
 					jframeLigue4.imprimeTabuleiro(tabuleiroAtual.getPosicoes());
 					verificaFimDeJogo();

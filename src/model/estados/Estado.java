@@ -54,10 +54,10 @@ public class Estado {
 			this.estado = estadoHelper.atualizaEstado(posicoesColuna, this.estado, this, coluna);
 			break;
 		case DIAGONAL:
-			LinkedList<DiagonaisDTO>  diagonais = getDiagonais(posicoes);
+			/*LinkedList<DiagonaisDTO>  diagonais = getDiagonais(posicoes);
 			for(DiagonaisDTO diagonaisDTO : diagonais){
 				this.estado = estadoHelper.atualizaEstado(diagonaisDTO.getPosicoes(), this.estado, this, diagonaisDTO.getId());	
-			}
+			}*/
 			break;
 
 		default:

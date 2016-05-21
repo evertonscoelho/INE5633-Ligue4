@@ -48,8 +48,8 @@ public class Nodo {
 		return (difDupla * Constantes.VALOR_DUPLA) + (difTripla * Constantes.VALOR_TRIPLA) + (difQuadra * Constantes.VALOR_QUADRA);
 	}
 	
-	public int getValor() {
-		int valor;
+	public double getValor() {
+		double valor;
 		if (!tabuleiro.ehFinal())
 			valor = calculaHeuristica();
 		else

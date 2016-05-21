@@ -7,11 +7,11 @@ import model.constantes.Constantes;
 public class MinMax {
 
 	private int profundidadeMaxima = Constantes.PROFUNDIDADE_MAXIMA;
-	private int[] jogadaRealizar;
+	private int[] jogadaRealizar = new int[2];
 
 	public Tabuleiro buscaMelhorJogada(Tabuleiro tabuleiroAtual) {
-		minMax(new Nodo(tabuleiroAtual), 1, true, Double.MIN_VALUE,
-				Double.MAX_VALUE);
+		minMax(new Nodo(tabuleiroAtual), 1, true, -8000000,
+				+8000000);
 		tabuleiroAtual.geraJogada(jogadaRealizar[0], jogadaRealizar[1], false);
 		return tabuleiroAtual;
 	}
@@ -30,7 +30,8 @@ public class MinMax {
 					valorFilho = valorFilho / ( nivel*0.05);
 					if (alpha < valorFilho) {
 						alpha = valorFilho;
-						jogadaRealizar = filho;
+						jogadaRealizar[0] = filho[0];
+						jogadaRealizar[1] = filho[1];
 						if (alpha >= beta) {
 							return alpha;
 						}
@@ -44,7 +45,8 @@ public class MinMax {
 					valorFilho = valorFilho / ( nivel*0.05);
 					if (beta > valorFilho) {
 						beta = valorFilho;
-						jogadaRealizar = filho;
+						jogadaRealizar[0] = filho[0];
+						jogadaRealizar[1] = filho[1];
 						if (alpha >= beta) {
 							return beta;
 						}
