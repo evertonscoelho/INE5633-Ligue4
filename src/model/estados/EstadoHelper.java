@@ -35,6 +35,10 @@ public class EstadoHelper {
 		estadoSituacao[indice].setTripla_pc(0);
 		estadoSituacao[indice].setQuadra_jogador(0);
 		estadoSituacao[indice].setQuadra_pc(0);
+		seqJogador = 0;
+		seqPC = 0;
+		seqVazio = 0;
+		seqVazioAnterior = 0;
 	}
 
 	private void fimLeitura() {
